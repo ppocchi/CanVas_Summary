@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
+import { Container, Row, Col } from 'react-bootstrap'
+import ReactMarkdown from 'react-markdown'
+
+import { sampleText } from './sampleText'
+
+
+const App = () => {
+  const [text, setText] = useState(sampleText)
+
+  const handleChange = event => {
+    setText(event.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <textarea 
+            onChange={handleChange}
+            value={text}
+            className='form-control'
+            rows='30' />
+        </Col>
+        <Col>
+          <ReactMarkdown>{text}</ReactMarkdown>
+        </Col>
+      </Row>
+    </Container>
+  
   );
+
 }
 
 export default App;
